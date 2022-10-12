@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { useSelector } from "react-redux";
-import BottomBar from "/components/BottomBar";
+import WinBar from "/components/WinBar";
 
 export default function Layout({
   children,
   title = "SP Window",
   mainClass = "",
 }) {
-  const setting = useSelector((state) => state.setting);
+  const setting = useSelector((state) => state.setting.background);
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function Layout({
         {children}
       </main>
 
-      <BottomBar />
+      <WinBar />
     </>
   );
 }

@@ -1,15 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { changeBackgroundColor } from "../../features/settings/settingSlice";
+import {
+  changeBackgroundColor,
+  changeBarColor,
+  changeBarPosition,
+} from "../../features/settings/settingSlice";
 
 export default function Personalization() {
-  const backgroundColor = useSelector((state) => state.setting.backgroundColor)
+  const backgroundColor = useSelector(
+    (state) => state.setting.background.backgroundColor
+  );
+  const bar = useSelector((state) => state.setting.bar);
   const dispatch = useDispatch();
+
+  const subTitleStyle = "text-5xl";
 
   return (
     <>
       <section>
-        <label>Background Color</label>
+        <h2 className={subTitleStyle}>Color</h2>
 
+        <label>Background Color:</label>
         <input
           type="color"
           value={backgroundColor}
@@ -17,7 +27,25 @@ export default function Personalization() {
         />
       </section>
 
-      <section></section>
+      <section>
+        <h2 className={subTitleStyle}>Bar</h2>
+
+        <label>Position:</label>
+        <select
+          value={bar.position}
+          onChange={(e) => dispatch(changeBarPosition(e.target.value))}
+        >
+          <option value="bottom-0">Bottom</option>
+          <option value="top-0">Top</option>
+        </select>
+
+        <label>Color:</label>
+        <input
+          type="color"
+          value={bar.color}
+          onChange={(e) => dispatch(changeBarColor(e.target.value))}
+        />
+      </section>
     </>
   );
 }

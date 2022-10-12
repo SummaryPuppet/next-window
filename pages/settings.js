@@ -2,22 +2,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BsArrowReturnLeft } from "react-icons/bs";
-import { useState } from "react";
-import Personalization from "../components/Settings/Personalization";
+import useSettings from "../hooks/settings/useSettings"
 
 export default function Settings() {
-  const [settingInPage, setSettingInPage] = useState(<p></p>);
-
-  const settingsOptions = [
-    {
-      name: "about",
-      click: () => setSettingInPage(),
-    },
-    {
-      name: "personalization",
-      click: () => setSettingInPage(<Personalization />),
-    },
-  ];
+  const { settingsInPage, settingsOption }  = useSettings()
 
   return (
     <>
@@ -35,7 +23,7 @@ export default function Settings() {
 
         <main className="grid grid-cols-5 pt-1 px-1 gap-2">
           <aside className="grid-end-2 flex flex-col gap-1">
-            {settingsOptions.map((setting, index) => (
+            {settingsOption.map((setting, index) => (
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.1 }}
@@ -46,7 +34,7 @@ export default function Settings() {
               </motion.button>
             ))}
           </aside>
-          <section>{settingInPage}</section>
+          <section>{settingsInPage}</section>
         </main>
       </div>
     </>
